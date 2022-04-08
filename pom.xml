@@ -6,12 +6,12 @@
 
     <groupId>dev.mruniverse.slimerepair</groupId>
     <artifactId>SlimeRepair</artifactId>
-    <version>3.0.2</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>SlimeRepair</name>
 
-    <description>Simple item repair/fix plugin with cooldown, sounds, and more.</description>
+    <description>Simple item repair plugin with cooldown, sounds, and more.</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
