@@ -1,0 +1,18 @@
+name: SlimeRepair
+version: ${project.version}
+main: dev.mruniverse.slimerepair.SlimeRepair
+api-version: 1.13
+author: JustJustin
+description: Simple item repair/fix plugin with cooldown, sounds, and more.
+
+depend: [Vault]
+softdepend:
+  - LuckPerms
+
+commands:
+  slimerepair:
+    aliases: [slimer]
+  repair:
+    aliases: [fix, repair-hand, fix-hand]
+  repairall:
+    aliases: [fixall, repair-all, fix-all]
