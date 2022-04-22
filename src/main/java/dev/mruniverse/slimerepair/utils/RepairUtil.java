@@ -51,7 +51,7 @@ public class RepairUtil {
                 || player.getItemInHand().getDurability() == 0) {
             MessageUtil.sendMessage(
                     player,
-                    messages.getString("invalid-item")
+                    messages.getString("messages.error.item")
             );
             return;
         }
