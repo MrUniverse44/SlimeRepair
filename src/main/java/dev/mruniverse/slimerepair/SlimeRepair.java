@@ -7,6 +7,7 @@ import dev.mruniverse.slimelib.loader.BaseSlimeLoader;
 import dev.mruniverse.slimelib.loader.DefaultSlimeLoader;
 import dev.mruniverse.slimelib.logs.SlimeLogs;
 import dev.mruniverse.slimelib.logs.platforms.SlimeLoggerSpigot;
+import dev.mruniverse.slimerepair.commands.PluginCommand;
 import dev.mruniverse.slimerepair.commands.RepairCommand;
 import dev.mruniverse.slimerepair.groups.SlimeGroups;
 import dev.mruniverse.slimerepair.ranks.PermissionPlugin;
@@ -66,6 +67,7 @@ public class SlimeRepair extends JavaPlugin implements SlimePlugin<JavaPlugin> {
         permissionPlugin = detectPermissionPlugin();
 
         loader.getCommands().register(new RepairCommand(this));
+        loader.getCommands().register(new PluginCommand(this));
     }
 
     @Override
@@ -166,6 +168,7 @@ public class SlimeRepair extends JavaPlugin implements SlimePlugin<JavaPlugin> {
 
     @Override
     public void reload() {
-
+        loader.reload();
+        groupManager.update();
     }
 }

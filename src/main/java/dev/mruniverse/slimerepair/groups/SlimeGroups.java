@@ -1,6 +1,7 @@
 package dev.mruniverse.slimerepair.groups;
 
 import dev.mruniverse.slimelib.control.Control;
+import dev.mruniverse.slimelib.logs.SlimeLogs;
 import dev.mruniverse.slimerepair.SlimeFile;
 import dev.mruniverse.slimerepair.SlimeRepair;
 
@@ -53,6 +54,8 @@ public class SlimeGroups {
 
         String handPath = "costs.repair-in-hand";
 
+        final SlimeLogs logs = plugin.getLogs();
+
         for (String main : control.getContent(handPath, false)) {
             String section = handPath + "." + main;
             handGroupList.add(
@@ -61,6 +64,8 @@ public class SlimeGroups {
                         main
                 )
             );
+
+            logs.info("&aGroup &b" + main + "&a loaded for &dHand-Repair-Groups");
 
             if (main.equalsIgnoreCase("default")) {
                 handDefault = new SlimeGroup(
@@ -80,6 +85,8 @@ public class SlimeGroups {
                             main
                     )
             );
+
+            logs.info("&aGroup &b" + main + "&a loaded for &dAll-Repair-Groups");
 
             if (main.equalsIgnoreCase("default")) {
                 allDefault = new SlimeGroup(

@@ -95,9 +95,7 @@ public class RepairUtil {
             );
         }
 
-        if (!player.hasPermission(costPermission)) {
-            plugin.getEconomy().withdrawPlayer(player, settings.getInt("repair-hand.cost"));
-        }
+        plugin.getEconomy().withdrawPlayer(player, cost);
 
         player.getItemInHand().setDurability((short) 0);
         player.updateInventory();
@@ -180,9 +178,7 @@ public class RepairUtil {
             );
         }
 
-        if (!player.hasPermission(costPermission)) {
-            plugin.getEconomy().withdrawPlayer(player, settings.getInt("repair-all.cost"));
-        }
+        plugin.getEconomy().withdrawPlayer(player, cost);
 
         for (ItemStack stack : queue) {
             stack.setDurability((short) 0);
