@@ -6,7 +6,7 @@
 
     <groupId>dev.mruniverse.slimerepair</groupId>
     <artifactId>SlimeRepair</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <name>SlimeRepair</name>
@@ -84,7 +84,7 @@
         <dependency>
             <groupId>com.github.MrUniverse44</groupId>
             <artifactId>SlimeLib</artifactId>
-            <version>1.0.3</version>
+            <version>1.0.8</version>
             <scope>compile</scope>
         </dependency>
 

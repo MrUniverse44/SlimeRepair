@@ -1,12 +1,12 @@
 package dev.mruniverse.slimerepair;
 
-import dev.mruniverse.slimelib.PluginMode;
+import dev.mruniverse.slimelib.SlimePlatform;
 import dev.mruniverse.slimelib.SlimePlugin;
-import dev.mruniverse.slimelib.input.spigot.SpigotInputManager;
+import dev.mruniverse.slimelib.SlimePluginInformation;
 import dev.mruniverse.slimelib.loader.BaseSlimeLoader;
 import dev.mruniverse.slimelib.loader.DefaultSlimeLoader;
+import dev.mruniverse.slimelib.logs.SlimeLogger;
 import dev.mruniverse.slimelib.logs.SlimeLogs;
-import dev.mruniverse.slimelib.logs.platforms.SlimeLoggerSpigot;
 import dev.mruniverse.slimerepair.commands.PluginCommand;
 import dev.mruniverse.slimerepair.commands.RepairCommand;
 import dev.mruniverse.slimerepair.groups.SlimeGroups;
@@ -16,6 +16,7 @@ import dev.mruniverse.slimerepair.ranks.supports.LuckPerms;
 import dev.mruniverse.slimerepair.ranks.supports.None;
 import dev.mruniverse.slimerepair.ranks.supports.Vault;
 import dev.mruniverse.slimerepair.sounds.SoundManager;
+import dev.mruniverse.slimerepair.utils.PluginUtils;
 import dev.mruniverse.slimerepair.utils.RepairUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -25,7 +26,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class SlimeRepair extends JavaPlugin implements SlimePlugin<JavaPlugin> {
 
-    private BaseSlimeLoader<JavaPlugin> loader;
+    private final SlimeLogs logs = SlimeLogger.createLogs(getServerType(), this, "SlimeRepair");
+
+    private final SlimePluginInformation information = new SlimePluginInformation(getServerType(), this);
+
+    private final DefaultSlimeLoader<JavaPlugin> loader = new DefaultSlimeLoader<>(this);
 
     private PermissionPlugin permissionPlugin;
 
@@ -37,20 +42,13 @@ public class SlimeRepair extends JavaPlugin implements SlimePlugin<JavaPlugin> {
 
     private RepairUtil repairUtil;
 
-    private SlimeLogs logs;
-
     private Economy economy;
 
     @Override
     public void onEnable() {
+        PluginUtils.setupLogger(logs);
 
-        logs = new SlimeLoggerSpigot(this);
-
-        final DefaultSlimeLoader<JavaPlugin> defaultLoader = new DefaultSlimeLoader<>(this, new SpigotInputManager(this));
-
-        defaultLoader.setFiles(SlimeFile.class);
-
-        loader = defaultLoader;
+        loader.setFiles(SlimeFile.class);
 
         loader.init();
 
@@ -123,13 +121,18 @@ public class SlimeRepair extends JavaPlugin implements SlimePlugin<JavaPlugin> {
     }
 
     @Override
-    public PluginMode getServerType() {
-        return PluginMode.SPIGOT;
+    public SlimePlatform getServerType() {
+        return SlimePlatform.SPIGOT;
     }
 
     @Override
     public SlimeLogs getLogs() {
         return logs;
+    }
+
+    @Override
+    public SlimePluginInformation getPluginInformation() {
+        return information;
     }
 
     @Override

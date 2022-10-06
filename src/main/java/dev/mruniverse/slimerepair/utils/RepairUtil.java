@@ -1,6 +1,6 @@
 package dev.mruniverse.slimerepair.utils;
 
-import dev.mruniverse.slimelib.control.Control;
+import dev.mruniverse.slimelib.file.configuration.ConfigurationHandler;
 import dev.mruniverse.slimerepair.SlimeFile;
 import dev.mruniverse.slimerepair.SlimeRepair;
 import dev.mruniverse.slimerepair.groups.SlimeGroup;
@@ -41,8 +41,8 @@ public class RepairUtil {
             timeout = timeouts.get(player.getUniqueId());
         }
 
-        Control settings = plugin.getLoader().getFiles().getControl(SlimeFile.SETTINGS);
-        Control messages = plugin.getLoader().getFiles().getControl(SlimeFile.MESSAGES);
+        ConfigurationHandler settings = plugin.getConfigurationHandler(SlimeFile.SETTINGS);
+        ConfigurationHandler messages = plugin.getConfigurationHandler(SlimeFile.MESSAGES);
 
         if (player.getItemInHand().getType() == Material.AIR
                 || player.getItemInHand().getType().isBlock()
@@ -111,8 +111,8 @@ public class RepairUtil {
     private void repairAll(Player player) {
 
 
-        Control settings = plugin.getLoader().getFiles().getControl(SlimeFile.SETTINGS);
-        Control messages = plugin.getLoader().getFiles().getControl(SlimeFile.MESSAGES);
+        ConfigurationHandler settings = plugin.getConfigurationHandler(SlimeFile.SETTINGS);
+        ConfigurationHandler messages = plugin.getConfigurationHandler(SlimeFile.MESSAGES);
 
         final List<ItemStack> queue = new ArrayList<>();
 

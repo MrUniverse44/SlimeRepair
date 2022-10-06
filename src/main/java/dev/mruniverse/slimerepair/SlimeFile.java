@@ -1,6 +1,7 @@
 package dev.mruniverse.slimerepair;
 
 import dev.mruniverse.slimelib.SlimeFiles;
+import dev.mruniverse.slimelib.SlimePlatform;
 
 public enum SlimeFile implements SlimeFiles {
     SETTINGS("settings.yml"),
@@ -18,13 +19,13 @@ public enum SlimeFile implements SlimeFiles {
     }
 
     @Override
-    public String getResourceFileName() {
-        return file;
+    public String getFolderName() {
+        return "";
     }
 
     @Override
-    public String getFolderName() {
-        return "";
+    public String getResourceFileName(SlimePlatform platform) {
+        return file;
     }
 
     @Override

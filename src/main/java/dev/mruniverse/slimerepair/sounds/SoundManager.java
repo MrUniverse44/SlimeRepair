@@ -1,6 +1,6 @@
 package dev.mruniverse.slimerepair.sounds;
 
-import dev.mruniverse.slimelib.control.Control;
+import dev.mruniverse.slimelib.file.configuration.ConfigurationHandler;
 import dev.mruniverse.slimelib.logs.SlimeLogs;
 import dev.mruniverse.slimerepair.SlimeFile;
 import dev.mruniverse.slimerepair.SlimeRepair;
@@ -44,7 +44,7 @@ public class SoundManager {
 
     public SoundManager(SlimeRepair plugin) {
         this.plugin = plugin;
-        Control file = plugin.getLoader().getFiles().getControl(SlimeFile.SETTINGS);
+        ConfigurationHandler file = plugin.getConfigurationHandler(SlimeFile.SETTINGS);
 
         try {
             for (PluginSound sound : PluginSound.values()) {
@@ -134,7 +134,7 @@ public class SoundManager {
     }
 
     public void updateSound(PluginSound sound) {
-        Control file = plugin.getLoader().getFiles().getControl(SlimeFile.SETTINGS);
+        ConfigurationHandler file = plugin.getConfigurationHandler(SlimeFile.SETTINGS);
 
         soundStatus.put(
                 sound,

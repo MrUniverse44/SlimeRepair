@@ -1,6 +1,6 @@
 package dev.mruniverse.slimerepair.groups;
 
-import dev.mruniverse.slimelib.control.Control;
+import dev.mruniverse.slimelib.file.configuration.ConfigurationHandler;
 import dev.mruniverse.slimelib.logs.SlimeLogs;
 import dev.mruniverse.slimerepair.SlimeFile;
 import dev.mruniverse.slimerepair.SlimeRepair;
@@ -50,7 +50,7 @@ public class SlimeGroups {
         handGroupList.clear();
         allGroupList.clear();
 
-        Control control = plugin.getLoader().getFiles().getControl(SlimeFile.SETTINGS);
+        ConfigurationHandler control = plugin.getConfigurationHandler(SlimeFile.SETTINGS);
 
         String handPath = "costs.repair-in-hand";
 

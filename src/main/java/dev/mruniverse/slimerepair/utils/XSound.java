@@ -1296,7 +1296,7 @@ public enum XSound {
    * @param name the sound name to format.
    *
    * @return an enum name.
-   * @since 1.0.0
+   * @since 1.1.0
    */
   
   private static String format( String name) {
@@ -1333,7 +1333,7 @@ public enum XSound {
    * @param sound the name of the sound.
    *
    * @return a matched XSound.
-   * @since 1.0.0
+   * @since 1.1.0
    */
   
   public static Optional<XSound> matchXSound( String sound) {
@@ -1363,7 +1363,7 @@ public enum XSound {
    * @param sound  the sound to play to the player.
    *
    * @see #play(Location, String)
-   * @since 1.0.0
+   * @since 1.1.0
    */
   
   public static CompletableFuture<Record> play( Player player, String sound) {
@@ -1545,7 +1545,7 @@ public enum XSound {
    * Parses the XSound as a {@link Sound} based on the server version.
    *
    * @return the vanilla sound.
-   * @since 1.0.0
+   * @since 1.1.0
    */
   public Sound parseSound() {
     return this.sound;
@@ -1561,7 +1561,7 @@ public enum XSound {
    * </blockquote>
    *
    * @return true if the current version has this sound, otherwise false.
-   * @since 1.0.0
+   * @since 1.1.0
    */
   public boolean isSupported() {
     return this.parseSound() != null;
@@ -1619,7 +1619,7 @@ public enum XSound {
    *
    * @param entity the entity to play the sound to.
    *
-   * @since 1.0.0
+   * @since 1.1.0
    */
   public void play( Entity entity) {
     play(entity, DEFAULT_VOLUME, DEFAULT_PITCH);
@@ -1632,7 +1632,7 @@ public enum XSound {
    * @param volume the volume of the sound, 1 is normal.
    * @param pitch  the pitch of the sound, 0 is normal.
    *
-   * @since 1.0.0
+   * @since 1.1.0
    */
   public void play( Entity entity, float volume, float pitch) {
     Objects.requireNonNull(entity, "Cannot play sound to a null entity");

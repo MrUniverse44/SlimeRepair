@@ -1,6 +1,6 @@
 package dev.mruniverse.slimerepair.ranks;
 
-import dev.mruniverse.slimelib.control.Control;
+import dev.mruniverse.slimelib.file.configuration.ConfigurationHandler;
 import dev.mruniverse.slimerepair.SlimeFile;
 import dev.mruniverse.slimerepair.SlimeRepair;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ public class RankStorage {
 
     public RankStorage(SlimeRepair plugin) {
         this.plugin = plugin;
-        Control settings = plugin.getLoader().getFiles().getControl(SlimeFile.SETTINGS);
+        ConfigurationHandler settings = plugin.getConfigurationHandler(SlimeFile.SETTINGS);
 
         usePrimaryGroup = settings.getStatus("settings.use-primary-group", true);
         groupsByPermissions = settings.getStatus("settings.assign-groups-by-permissions", false);

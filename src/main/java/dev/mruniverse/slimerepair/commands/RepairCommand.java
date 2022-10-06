@@ -2,8 +2,8 @@ package dev.mruniverse.slimerepair.commands;
 
 import dev.mruniverse.slimelib.commands.command.Command;
 import dev.mruniverse.slimelib.commands.command.SlimeCommand;
-import dev.mruniverse.slimelib.commands.sender.Sender;
-import dev.mruniverse.slimelib.commands.sender.player.SlimePlayer;
+import dev.mruniverse.slimelib.source.SlimeSource;
+import dev.mruniverse.slimelib.source.player.SlimePlayer;
 import dev.mruniverse.slimerepair.SlimeFile;
 import dev.mruniverse.slimerepair.SlimeRepair;
 import dev.mruniverse.slimerepair.utils.RepairUtil;
@@ -40,24 +40,23 @@ public class RepairCommand implements SlimeCommand {
     }
 
     @Override
-    public void execute(Sender sender, String label, String[] args) {
-        if (!(sender instanceof SlimePlayer)) {
+    public void execute(SlimeSource sender, String label, String[] args) {
+        if (!sender.isPlayer()) {
             sender.sendColoredMessage(
-                    plugin.getLoader().getFiles().getControl(SlimeFile.MESSAGES).getString(
+                    plugin.getConfigurationHandler(SlimeFile.MESSAGES).getString(
                             "messages.error.console",
                             "&cYou must be a player to execute that command!")
             );
+            return;
         }
-        if (sender instanceof SlimePlayer) {
-            Player player = ((SlimePlayer) sender).get();
+        Player player = ((SlimePlayer) sender).get();
 
-            if (args.length == 0 || args[0].equalsIgnoreCase("hand")) {
-                plugin.getRepairUtil().repair(RepairUtil.RepairMode.HAND, player);
-                return;
-            }
-            if (args[0].equalsIgnoreCase("all")) {
-                plugin.getRepairUtil().repair(RepairUtil.RepairMode.ALL, player);
-            }
+        if (args.length == 0 || args[0].equalsIgnoreCase("hand")) {
+            plugin.getRepairUtil().repair(RepairUtil.RepairMode.HAND, player);
+            return;
+        }
+        if (args[0].equalsIgnoreCase("all")) {
+            plugin.getRepairUtil().repair(RepairUtil.RepairMode.ALL, player);
         }
     }
 }

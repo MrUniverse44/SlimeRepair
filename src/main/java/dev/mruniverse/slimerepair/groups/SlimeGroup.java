@@ -1,6 +1,6 @@
 package dev.mruniverse.slimerepair.groups;
 
-import dev.mruniverse.slimelib.control.Control;
+import dev.mruniverse.slimelib.file.configuration.ConfigurationHandler;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class SlimeGroup {
 
     private final int cost;
 
-    public SlimeGroup(Control control, String main) {
+    public SlimeGroup(ConfigurationHandler control, String main) {
         this.aliases = control.getStringList("aliases");
         this.cost = control.getInt("cost", 10);
         this.main = main;

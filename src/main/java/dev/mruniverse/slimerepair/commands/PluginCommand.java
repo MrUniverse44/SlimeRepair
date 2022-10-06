@@ -2,7 +2,7 @@ package dev.mruniverse.slimerepair.commands;
 
 import dev.mruniverse.slimelib.commands.command.Command;
 import dev.mruniverse.slimelib.commands.command.SlimeCommand;
-import dev.mruniverse.slimelib.commands.sender.Sender;
+import dev.mruniverse.slimelib.source.SlimeSource;
 import dev.mruniverse.slimerepair.SlimeRepair;
 
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class PluginCommand implements SlimeCommand {
     }
 
     @Override
-    public void execute(Sender sender, String commandLabel, String[] args) {
+    public void execute(SlimeSource sender, String commandLabel, String[] args) {
         if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
             sender.sendColoredMessage("&aSlimeRepair created by JustJustin with love &d♥");
             return;
