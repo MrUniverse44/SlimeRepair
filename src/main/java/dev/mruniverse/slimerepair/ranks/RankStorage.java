@@ -83,7 +83,7 @@ public class RankStorage {
 
     public String getByPermission(Player player) {
         for (Object group : primaryGroupFindingList) {
-            if (player.hasPermission("guardiankitpvp.tab.group." + group)) {
+            if (player.hasPermission("slimerepair.group." + group)) {
                 return String.valueOf(group);
             }
         }

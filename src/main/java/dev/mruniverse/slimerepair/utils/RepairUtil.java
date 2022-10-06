@@ -129,6 +129,8 @@ public class RepairUtil {
             }
         }
 
+        Collections.addAll(queue, player.getInventory().getArmorContents());
+
         if (queue.isEmpty()) {
             MessageUtil.sendMessage(
                     player,
