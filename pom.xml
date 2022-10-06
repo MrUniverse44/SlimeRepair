@@ -131,11 +131,11 @@
                             <relocations>
                                 <relocation>
                                     <pattern>org.bstats</pattern>
-                                    <shadedPattern>dev.demeng.ultrarepair.shaded.bstats</shadedPattern>
+                                    <shadedPattern>dev.mruniverse.slimerepair.shaded.bstats</shadedPattern>
                                 </relocation>
                                 <relocation>
-                                    <pattern>com.demeng7215.demlib</pattern>
-                                    <shadedPattern>dev.demeng.ultrarepair.shaded.demlib</shadedPattern>
+                                    <pattern>dev.mruniverse.slimelib</pattern>
+                                    <shadedPattern>dev.mruniverse.slimerepair.shaded.slimelib</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>

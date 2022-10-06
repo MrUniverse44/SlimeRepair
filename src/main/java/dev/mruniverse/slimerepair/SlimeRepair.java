@@ -20,6 +20,7 @@ import dev.mruniverse.slimerepair.utils.PluginUtils;
 import dev.mruniverse.slimerepair.utils.RepairUtil;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -66,6 +67,10 @@ public class SlimeRepair extends JavaPlugin implements SlimePlugin<JavaPlugin> {
 
         loader.getCommands().register(new RepairCommand(this));
         loader.getCommands().register(new PluginCommand(this));
+
+        Metrics metrics = new Metrics(this, 16592);
+
+        getLogs().info("Metrics has been enabled (" + metrics.isEnabled() + ")");
     }
 
     @Override
