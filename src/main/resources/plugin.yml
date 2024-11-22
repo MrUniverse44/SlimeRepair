@@ -1,6 +1,6 @@
 name: SlimeRepair
 version: ${project.version}
-main: dev.mruniverse.slimerepair.SlimeRepair
+main: me.blueslime.slimerepair.SlimeRepair
 api-version: 1.13
 author: JustJustin
 description: Simple item repair/fix plugin with cooldown, sounds, and more.

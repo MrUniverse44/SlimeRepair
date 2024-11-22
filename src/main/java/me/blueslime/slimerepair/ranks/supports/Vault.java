@@ -1,6 +1,6 @@
-package dev.mruniverse.slimerepair.ranks.supports;
+package me.blueslime.slimerepair.ranks.supports;
 
-import dev.mruniverse.slimerepair.ranks.PermissionPlugin;
+import me.blueslime.slimerepair.ranks.PermissionPlugin;
 import org.bukkit.entity.Player;
 import net.milkbowl.vault.permission.Permission;
 

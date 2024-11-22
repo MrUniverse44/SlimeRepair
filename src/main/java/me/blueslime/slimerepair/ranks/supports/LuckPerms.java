@@ -1,19 +1,20 @@
-package dev.mruniverse.slimerepair.ranks.supports;
+package me.blueslime.slimerepair.ranks.supports;
 
-import dev.mruniverse.slimelib.logs.SlimeLogs;
-import dev.mruniverse.slimerepair.ranks.PermissionPlugin;
-import dev.mruniverse.slimerepair.ranks.RankStorage;
+import me.blueslime.bukkitmeteor.implementation.Implements;
+import me.blueslime.bukkitmeteor.logs.MeteorLogger;
+import me.blueslime.slimerepair.ranks.PermissionPlugin;
+import me.blueslime.slimerepair.services.RankService;
+
 import net.luckperms.api.LuckPermsProvider;
 import net.luckperms.api.model.user.User;
 import net.luckperms.api.node.NodeType;
 import net.luckperms.api.node.types.InheritanceNode;
+
 import org.bukkit.entity.Player;
 
 public class LuckPerms implements PermissionPlugin {
 
     private static final String UPDATE_MESSAGE = "Please install a newest version of LuckPerms, this version is outdated, support for: LuckPerms5 or higher";
-
-    private final SlimeLogs logs;
 
     private final String version;
 
@@ -21,9 +22,8 @@ public class LuckPerms implements PermissionPlugin {
      * Constructs new instance with given parameter
      * @param version - luckPerms version
      */
-    public LuckPerms(SlimeLogs logs, String version) {
+    public LuckPerms(String version) {
         this.version = version;
-        this.logs = logs;
     }
 
 
@@ -31,10 +31,10 @@ public class LuckPerms implements PermissionPlugin {
         if (version.startsWith("4")) return UPDATE_MESSAGE;
         net.luckperms.api.LuckPerms api = getAPI();
         if (api == null) {
-            return RankStorage.DEFAULT_GROUP;
+            return RankService.DEFAULT_GROUP;
         }
         User user = api.getUserManager().getUser(p.getUniqueId());
-        if (user == null) return RankStorage.DEFAULT_GROUP;
+        if (user == null) return RankService.DEFAULT_GROUP;
         return user.getPrimaryGroup();
     }
 
@@ -42,7 +42,7 @@ public class LuckPerms implements PermissionPlugin {
     public String[] getAllGroups(Player p) {
         if (version.startsWith("4")) {
             return new String[]{
-                    UPDATE_MESSAGE
+                UPDATE_MESSAGE
             };
         }
 
@@ -50,7 +50,7 @@ public class LuckPerms implements PermissionPlugin {
 
         if (api == null) {
             return new String[]{
-                    RankStorage.DEFAULT_GROUP
+                RankService.DEFAULT_GROUP
             };
         }
 
@@ -58,7 +58,7 @@ public class LuckPerms implements PermissionPlugin {
 
         if (user == null) {
             return new String[]{
-                    RankStorage.DEFAULT_GROUP
+                RankService.DEFAULT_GROUP
             };
         }
 
@@ -69,7 +69,7 @@ public class LuckPerms implements PermissionPlugin {
         try {
             return LuckPermsProvider.get();
         } catch (Exception e) {
-            logs.error("LuckPerms v" + version + " threw an exception when retrieving API instance: " + e.getMessage(), e);
+            Implements.fetch(MeteorLogger.class).error(e, "LuckPerms v" + version + " threw an exception when retrieving API instance: " + e.getMessage());
             return null;
         }
     }

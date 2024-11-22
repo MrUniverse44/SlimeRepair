@@ -1,4 +1,4 @@
-package dev.mruniverse.slimerepair.ranks;
+package me.blueslime.slimerepair.ranks;
 
 import org.bukkit.entity.Player;
 

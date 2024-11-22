@@ -1,36 +1,36 @@
-package dev.mruniverse.slimerepair.ranks;
+package me.blueslime.slimerepair.services;
 
-import dev.mruniverse.slimelib.file.configuration.ConfigurationHandler;
-import dev.mruniverse.slimerepair.SlimeFile;
-import dev.mruniverse.slimerepair.SlimeRepair;
+import me.blueslime.bukkitmeteor.implementation.module.AdvancedModule;
+import me.blueslime.bukkitmeteor.logs.MeteorLogger;
+import me.blueslime.slimerepair.ranks.PermissionPlugin;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RankStorage {
-    private final List<String> primaryGroupFindingList;
+public class RankService implements AdvancedModule {
+
+    private List<String> primaryGroupFindingList;
 
     public static final String DEFAULT_GROUP = "NONE";
 
-    private final boolean groupsByPermissions;
+    private boolean groupsByPermissions;
 
-    private final boolean usePrimaryGroup;
+    private boolean usePrimaryGroup;
 
-    private final SlimeRepair plugin;
+    @Override
+    public void initialize() {
+        FileConfiguration settings = fetch(FileConfiguration.class);
 
-    public RankStorage(SlimeRepair plugin) {
-        this.plugin = plugin;
-        ConfigurationHandler settings = plugin.getConfigurationHandler(SlimeFile.SETTINGS);
-
-        usePrimaryGroup = settings.getStatus("settings.use-primary-group", true);
-        groupsByPermissions = settings.getStatus("settings.assign-groups-by-permissions", false);
-        primaryGroupFindingList = new ArrayList<>();
+        this.usePrimaryGroup = settings.getBoolean("settings.use-primary-group", true);
+        this.groupsByPermissions = settings.getBoolean("settings.assign-groups-by-permissions", false);
+        this.primaryGroupFindingList = new ArrayList<>();
 
         List<String> groups = settings.getStringList("settings.primary-group-finding-list");
 
-        if(!groups.isEmpty()) {
+        if (!groups.isEmpty()) {
             for (Object group : groups) {
                 primaryGroupFindingList.add(group.toString());
             }
@@ -39,6 +39,13 @@ public class RankStorage {
                 primaryGroupFindingList.add(group.toString());
             }
         }
+    }
+
+    @Override
+    public void reload() {
+        primaryGroupFindingList.clear();
+
+        initialize();
     }
 
     public String detectPermissionGroup(Player player) {
@@ -53,16 +60,16 @@ public class RankStorage {
 
     public String getByPrimary(Player player) {
         try {
-            return plugin.getPermissionPlugin().getPrimaryGroup(player);
+            return fetch(PermissionPlugin.class).getPrimaryGroup(player);
         } catch (Exception e) {
-            plugin.getLogs().error("Failed to get permission groups of " + player.getName() + " using " + plugin.getPermissionPlugin().getName() + " v" + plugin.getPermissionPlugin().getVersion(), e);
+            fetch(MeteorLogger.class).error(e, "Failed to get permission groups of " + player.getName() + " using " + fetch(PermissionPlugin.class).getName() + " v" + fetch(PermissionPlugin.class).getVersion());
             return DEFAULT_GROUP;
         }
     }
 
     public String getFromList(Player player) {
         try {
-            String[] playerGroups = plugin.getPermissionPlugin().getAllGroups(player);
+            String[] playerGroups = fetch(PermissionPlugin.class).getAllGroups(player);
             if (playerGroups != null && playerGroups.length > 0) {
                 for (String groupFromList : primaryGroupFindingList) {
                     for (String playerGroup : playerGroups) {
@@ -76,7 +83,7 @@ public class RankStorage {
                 return DEFAULT_GROUP;
             }
         } catch (Exception e) {
-            plugin.getLogs().error("Failed to get permission groups of " + player.getName() + " using " + plugin.getPermissionPlugin().getName() + " v" + plugin.getPermissionPlugin().getVersion(), e);
+            fetch(MeteorLogger.class).error(e, "Failed to get permission groups of " + player.getName() + " using " + fetch(PermissionPlugin.class).getName() + " v" + fetch(PermissionPlugin.class).getVersion());
             return DEFAULT_GROUP;
         }
     }
@@ -87,7 +94,7 @@ public class RankStorage {
                 return String.valueOf(group);
             }
         }
-        plugin.getLogs().error("Player " + player.getName() + " does not have any group permission while assign-groups-by-permissions is enabled! Did you forget to add his group to primary-group-finding-list?");
+        fetch(MeteorLogger.class).error("Player " + player.getName() + " does not have any group permission while assign-groups-by-permissions is enabled! Did you forget to add his group to primary-group-finding-list?");
         return DEFAULT_GROUP;
     }
 
