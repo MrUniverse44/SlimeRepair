@@ -59,7 +59,7 @@ public class SlimeRepair extends BukkitMeteorPlugin implements AdvancedModule {
             RankService.class
         ).finish();
 
-        registerImpl(SlimeRepair.class, true);
+        registerImpl(SlimeRepair.class, this, true);
 
         setupEconomy();
 
