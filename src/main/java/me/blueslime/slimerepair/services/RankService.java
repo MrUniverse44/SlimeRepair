@@ -22,7 +22,7 @@ public class RankService implements AdvancedModule {
 
     @Override
     public void initialize() {
-        FileConfiguration settings = fetch(FileConfiguration.class);
+        FileConfiguration settings = fetch(FileConfiguration.class, "settings.yml");
 
         this.usePrimaryGroup = settings.getBoolean("settings.use-primary-group", true);
         this.groupsByPermissions = settings.getBoolean("settings.assign-groups-by-permissions", false);
