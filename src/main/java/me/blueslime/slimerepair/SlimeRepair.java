@@ -17,9 +17,11 @@ import me.blueslime.slimerepair.ranks.supports.None;
 import me.blueslime.slimerepair.ranks.supports.Vault;
 import me.blueslime.slimerepair.services.SoundService;
 import me.blueslime.slimerepair.services.RepairService;
+import me.blueslime.utilitiesapi.utils.consumer.PluginConsumer;
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
 import org.bstats.bukkit.Metrics;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -30,8 +32,7 @@ public class SlimeRepair extends BukkitMeteorPlugin implements AdvancedModule {
 
     @Override
     public void onEnable() {
-        initialize(this);
-
+        initialize(this, false, true);
     }
 
     @Override
@@ -74,7 +75,7 @@ public class SlimeRepair extends BukkitMeteorPlugin implements AdvancedModule {
         new Metrics(this, 16592);
 
         getLogs().info("Metrics has been enabled");
-
+        a();
     }
 
     private PermissionPlugin detectPermissionPlugin() {
