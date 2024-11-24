@@ -25,4 +25,9 @@ public class PluginCommand extends AdvancedCommand<SlimeRepair> implements Advan
             }
         }
     }
+
+    @Override
+    public boolean overwriteCommand() {
+        return true;
+    }
 }

@@ -35,4 +35,9 @@ public class RepairCommand extends AdvancedCommand<SlimeRepair> implements Advan
             fetch(RepairService.class).repair(RepairMode.ALL, player);
         }
     }
+
+    @Override
+    public boolean overwriteCommand() {
+        return true;
+    }
 }
