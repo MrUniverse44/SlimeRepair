@@ -10,6 +10,12 @@ settings:
     - "Helper"
     - "default"
 
+commands-labels:
+  - "repair"
+  - "fix"
+  - "efix"
+  - "erepair"
+
 # Settings for hand repair.
 repair-hand:
   # The cooldown, in seconds.
