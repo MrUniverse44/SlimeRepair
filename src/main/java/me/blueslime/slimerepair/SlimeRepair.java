@@ -104,12 +104,7 @@ public class SlimeRepair extends BukkitMeteorPlugin implements AdvancedModule {
     }
 
     private void setupEconomy() {
-        if (getServer().getPluginManager().isPluginEnabled("Neron")) {
-            registerImpl(EconomyProvider.class, new NeronProvider(), true);
-            return;
-        }
-
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+        if (!getServer().getPluginManager().isPluginEnabled("Vault")) {
             registerImpl(EconomyProvider.class, new NoneProvider(), true);
             return;
         }

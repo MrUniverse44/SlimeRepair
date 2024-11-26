@@ -1,12 +1,14 @@
 package me.blueslime.slimerepair.economy.providers;
 
+import me.blueslime.bukkitmeteor.implementation.module.AdvancedModule;
+import me.blueslime.bukkitmeteor.logs.MeteorLogger;
 import me.blueslime.slimerepair.SlimeRepair;
 import me.blueslime.slimerepair.economy.EconomyProvider;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-public class VaultProvider implements EconomyProvider {
+public class VaultProvider implements EconomyProvider, AdvancedModule {
 
     private final Economy economy;
 
@@ -36,7 +38,9 @@ public class VaultProvider implements EconomyProvider {
         if (economy == null) {
             return false;
         }
-        return economy.has(player, amount);
+        boolean result = economy.has(player, amount);
+        fetch(MeteorLogger.class).debug("Balance debug: check if player " + player.getName() + " has economy of " + amount + " is: " + result);
+        return result;
     }
 
     /**
@@ -50,6 +54,7 @@ public class VaultProvider implements EconomyProvider {
         if (economy == null) {
             return;
         }
+        fetch(MeteorLogger.class).debug("Balance debug: withdraw for " + player.getName() + " of " + amount + ".");
         economy.withdrawPlayer(player, amount);
     }
 
@@ -64,6 +69,7 @@ public class VaultProvider implements EconomyProvider {
         if (economy == null) {
             return;
         }
+        fetch(MeteorLogger.class).debug("Balance debug: deposit for " + player.getName() + " of " + amount + ".");
         economy.depositPlayer(player, amount);
     }
 }
